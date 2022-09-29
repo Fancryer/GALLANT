@@ -64,7 +64,7 @@ namespace GALL
 			T_CONST,		// A-Z
 			T_TOP,			// ? - print stack top as integer
 			T_SYM,			// $ - print stack top as char
-			T_WHITESPACE,	// , - print whitespace
+			T_WHITESPACE,		// , - print whitespace
 			T_NEWLINE,		// . - print newline
 			T_VARIABLE,
 			T_ASSIGN,		// : - assign stack top to another stack top, then pop it
@@ -84,7 +84,7 @@ namespace GALL
 		typedef enum
 		{
 			E_NONE,
-			E_NOP,					//Not operator
+			E_NOP,			//Not operator
 			E_EXIT,
 			E_OVERFLOW,
 			E_NEGATIVE,
@@ -92,10 +92,10 @@ namespace GALL
 			E_ZERODIVISION,
 			E_EmptyStackAccessing,
 			E_EmptyStackShaving,
-			E_WRONGSTACK,			//Wrong stack is using
+			E_WRONGSTACK,		//Wrong stack is using
 			E_NESTEDLOOP,
 			E_NOTINLOOP
-			//E_NID					//Not ID
+			//E_NID			//Not ID
 		}ErrorType;
 
 		const bool IsDigit(char c) { return c>='0'&&c<='9'; }
@@ -161,18 +161,18 @@ namespace GALL
 				case'(':return T_MOPEN;
 				case')':return T_MCLOSE;
 				//Stack top oparations
-				case'?':return T_TOP;					//Print stack top value as integer
-				case'$':return T_SYM;					//Print stack top value as char
-				case'~':return T_SHAVE;					//Pop stack top
-				case':':return T_ASSIGN;				//Assign top of this stack top to another stack top and pop this stack top
+				case'?':return T_TOP;			//Print stack top value as integer
+				case'$':return T_SYM;			//Print stack top value as char
+				case'~':return T_SHAVE;			//Pop stack top
+				case':':return T_ASSIGN;		//Assign top of this stack top to another stack top and pop this stack top
 				//Service
-				case'!':return T_EXIT;					//Finish program
+				case'!':return T_EXIT;			//Finish program
 				case'#':return T_SWITCH;
 				case'%':return T_CLEAR;
 				case';':return T_REVERSE;
 			}
 			if(IsNumber(Token))return T_CONST;		//Push const to calc stack
-			if(IsVariable(Token))return T_VARIABLE;	//Push variable to var stack
+			if(IsVariable(Token))return T_VARIABLE;		//Push variable to var stack
 			return T_UNDEFINED;
 		}
 
@@ -283,9 +283,8 @@ namespace GALL
 		}
 
 		//Ready to work with
-		ErrorType NewLine() { cout<<"\n";return E_NONE; }
-
-		ErrorType Whitespace() { cout<<" ";return E_NONE; }
+		//ErrorType NewLine() { cout<<"\n";return E_NONE; }
+		//ErrorType Whitespace() { cout<<" ";return E_NONE; }
 
 		//Ready to work with any stack
 		ErrorType Shave()
@@ -566,32 +565,6 @@ namespace GALL
 					return;
 				}
 			}
-			/*
-			for(auto s:Source)
-			{
-				cout<<"Calc: ";
-				cout<<((CalcStack.empty()?"EMPTY":to_string(CalcStack.top())));
-				cout<<" Var: ";
-				cout<<((VarStack.empty()?"EMPTY":to_string(VarStack.top())));
-				cout<<" Variables: \n";
-				for(auto i:Variables)
-				{
-					if(i)cout<<"="<<i<<" ";
-				}
-				cout<<endl;
-				ExecResult=Exec(s);
-				switch(ExecResult)
-				{
-					case E_NOTSYMBOL:cout<<"Stack top cannot be represented as symbol!"<<endl;return;
-					case E_ZERODIVISION:cout<<"Cannot divide by zero!"<<endl;return;
-					case E_OVERFLOW:cout<<"Unsigned int overflow!"<<endl;return;
-					case E_EmptyStackAccessing:cout<<"Trying to access empty stack top!"<<endl;return;
-					case E_EmptyStackShaving:cout<<"Trying to shave empty stack top!"<<endl;return;
-					case E_NEGATIVE:cout<<"Trying to get negative value!"<<endl;return;
-						//default:cout<<"A"<<endl;
-				}
-			}
-			*/
 		}
 	public:
 		Interpreter(string Source)
