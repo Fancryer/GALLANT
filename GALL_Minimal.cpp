@@ -68,7 +68,7 @@ namespace GALL
 			T_NEWLINE,		// . - print newline
 			T_VARIABLE,
 			T_ASSIGN,		// : - assign stack top to another stack top, then pop it
-			//T_READ,			// , - read symbol from console input
+			//T_READ,		// , - read symbol from console input
 			T_SHAVE,		// ~ - pop stack top
 			T_EXIT,			// ! - finish program	
 			T_SWITCH,		// # - switch working stack
